@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: web
+    restart: unless-stopped
+    depends_on:
+      - php
+    volumes:
+      - ./www:/www:ro
+      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9080:80
+  php:
+    build: ./docker/php
+    container_name: php
+    restart: unless-stopped
+    depends_on:
+      - db
+    volumes:
+      - ./www:/www:ro
+  db:
+    image: mariadb
+    container_name: db
+    restart: unless-stopped
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+
+volumes:
+  db-data:
