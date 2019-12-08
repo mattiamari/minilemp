@@ -3,7 +3,7 @@ A minimal, dockerized, Nginx + PHP + MariaDB environment for local development.
 
 ## Usage
 ```bash
-git clone https://github.com/mattiamari/minilemp
+git clone https://github.com/mattiamari/minilemp.git
 cd minilemp
 docker-compose up
 ```
